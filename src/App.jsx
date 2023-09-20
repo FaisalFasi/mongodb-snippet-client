@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import SnippetDetail from "./components/SnippetDetail";
+import Home from "./components/Home";
+
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<h1>About</h1>} />
           <Route path="/:snippet_id" element={<SnippetDetail />} />
         </Routes>

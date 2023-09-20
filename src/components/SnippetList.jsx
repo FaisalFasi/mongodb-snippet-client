@@ -1,25 +1,19 @@
-import { useParams } from "react-router-dom";
-
-// ==============================================
-
 import React, { useState } from "react";
 import { useEffect } from "react";
-const SnippetDetail = () => {
-  let { snippet_id } = useParams();
-
-  const [snippet, setSnippet] = useState();
+const SnippetList = () => {
+  const [snippets, setSnippets] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:9000/snippets/" + snippet_id)
+    fetch("http://localhost:9000/snippets")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setSnippet(data);
+        setSnippets(data);
       });
   }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {snippet ? (
+      {snippets.map((snippet) => (
         <div
           style={{
             border: "1px solid black",
@@ -49,13 +43,11 @@ const SnippetDetail = () => {
             <span>{new Date(snippet.modifiedAt).toLocaleDateString()}</span>
           </div>
 
-          <p>{snippet.content}...</p>
+          <p>{snippet.content.substring(0, 40)}...</p>
         </div>
-      ) : (
-        <h1> Loading ... </h1>
-      )}
+      ))}
     </div>
   );
 };
 
-export default SnippetDetail;
+export default SnippetList;
