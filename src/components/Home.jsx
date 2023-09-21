@@ -4,7 +4,13 @@ import SnippetList from "./SnippetList";
 function Home() {
   return (
     <div>
-      <h1>Welcome Home </h1>
+      <h1
+        style={{
+          textAlign: "center",
+        }}
+      >
+        Welcome to FR-PasteBin{" "}
+      </h1>
       <SnippetCreationForm />
       <SnippetList />
     </div>

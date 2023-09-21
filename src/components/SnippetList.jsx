@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import SnippetListItem from "./SnippetListItem";
 const SnippetList = () => {
   const [snippets, setSnippets] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:9000/snippets")
       .then((res) => res.json())
@@ -11,40 +13,27 @@ const SnippetList = () => {
       });
   }, []);
 
+  const handleDelete = (shortId) => {
+    fetch("http://localhost:9000/snippets/" + shortId, {
+      method: "DELETE",
+    }).then((httpResponse) => {
+      if (httpResponse.ok) {
+        alert("snippet deleted successfully");
+        setSnippets((prev) => prev.filter((item) => item.shortId !== shortId));
+      } else {
+        alert("Something went wrong. please try again later");
+      }
+    });
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {snippets.map((snippet) => (
-        <div
-          style={{
-            border: "1px solid black",
-            margin: "10px",
-            textAlign: "center",
-            padding: "10px",
-          }}
-          key={snippet.id}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <span>{snippet.id}</span>
-
-            <a
-              href={`/${snippet.id} `}
-              style={{
-                target: "_blank",
-              }}
-            >
-              <span>{snippet.title}</span>
-            </a>
-
-            <span>{new Date(snippet.modifiedAt).toLocaleDateString()}</span>
-          </div>
-
-          <p>{snippet.content.substring(0, 40)}...</p>
-        </div>
+        <SnippetListItem
+          key={snippet.shortId}
+          snippet={snippet}
+          handleDelete={handleDelete}
+        />
       ))}
     </div>
   );

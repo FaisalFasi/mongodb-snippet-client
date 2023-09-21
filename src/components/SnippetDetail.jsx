@@ -27,7 +27,7 @@ const SnippetDetail = () => {
             textAlign: "center",
             padding: "10px",
           }}
-          key={snippet.id}
+          key={snippet.shortId}
         >
           <div
             style={{
@@ -35,10 +35,10 @@ const SnippetDetail = () => {
               justifyContent: "space-between",
             }}
           >
-            <span>{snippet.id}</span>
+            <span>{snippet.shortId}</span>
 
             <a
-              href={`/${snippet.id} `}
+              href={`/${snippet.shortId} `}
               style={{
                 target: "_blank",
               }}
