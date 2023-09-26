@@ -1,5 +1,5 @@
 import React from "react";
-
+import relativeDate from "../utils/relativeDate";
 const SnippetListItem = ({ snippet, handleDelete }) => {
   return (
     <div
@@ -13,10 +13,12 @@ const SnippetListItem = ({ snippet, handleDelete }) => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          flexDirection: "column",
+          gap: "20px",
+          // justifyContent: "space-between",
         }}
       >
-        <span>{snippet.shortId}</span>
+        {/* <span>{snippet.shortId}</span> */}
 
         <a
           href={`/${snippet.shortId} `}
@@ -27,10 +29,12 @@ const SnippetListItem = ({ snippet, handleDelete }) => {
           <span>{snippet.title}</span>
         </a>
 
-        <span>{new Date(snippet.modifiedAt).toLocaleDateString()}</span>
+        {/* <span>{new Date(snippet.updatedAt).toLocaleDateString()}</span> */}
       </div>
-      <p>{snippet.content.substring(0, 40)}...</p>
-      <button onClick={() => handleDelete(snippet.shortId)}>❌</button>
+      <p>{relativeDate(new Date(snippet.updatedAt))}...</p>
+
+      {/* <p>{snippet.content.substring(0, 40)}...</p> */}
+      {/* <button onClick={() => handleDelete(snippet.shortId)}>❌</button> */}
     </div>
   );
 };

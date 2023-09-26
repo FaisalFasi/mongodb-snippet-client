@@ -32,7 +32,7 @@ const SnippetList = () => {
         <SnippetListItem
           key={snippet.shortId}
           snippet={snippet}
-          handleDelete={handleDelete}
+          // handleDelete={handleDelete}
         />
       ))}
     </div>
