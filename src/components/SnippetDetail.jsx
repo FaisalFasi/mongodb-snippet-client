@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import React, { useState } from "react";
 import { useEffect } from "react";
+
+import CodeBlock from "./CodeBlock";
+
 const SnippetDetail = () => {
   let { snippet_id } = useParams();
   const navigate = useNavigate();
@@ -49,6 +52,9 @@ const SnippetDetail = () => {
     });
   };
 
+  const handleEdit = (value) => {
+    setSnippet({ ...snippet, content: value });
+  };
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {snippet ? (
@@ -78,11 +84,15 @@ const SnippetDetail = () => {
 
             <span>{new Date(snippet.updatedAt).toLocaleDateString()}</span>
           </div>
-          <textarea
+          {/* <textarea
             value={snippet.content}
             onChange={(e) => {
               setSnippet({ ...snippet, content: e.target.value });
             }}
+          /> */}
+          <CodeBlock
+            code={snippet.content || "This snippet is empty"}
+            handleEdit={handleEdit}
           />
           <button onClick={handleSave}>Save</button>{" "}
           <button onClick={handleDelete}>Delete</button>
