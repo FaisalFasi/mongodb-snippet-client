@@ -13,27 +13,10 @@ const SnippetList = () => {
       });
   }, []);
 
-  const handleDelete = (shortId) => {
-    fetch("http://localhost:9000/snippets/" + shortId, {
-      method: "DELETE",
-    }).then((httpResponse) => {
-      if (httpResponse.ok) {
-        alert("snippet deleted successfully");
-        setSnippets((prev) => prev.filter((item) => item.shortId !== shortId));
-      } else {
-        alert("Something went wrong. please try again later");
-      }
-    });
-  };
-
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className="flex flex-col h-[90%] w-[300px] bg-blue-400 rounded-xl mt-4 overflow-scroll">
       {snippets.map((snippet) => (
-        <SnippetListItem
-          key={snippet.shortId}
-          snippet={snippet}
-          // handleDelete={handleDelete}
-        />
+        <SnippetListItem key={snippet.shortId} snippet={snippet} />
       ))}
     </div>
   );

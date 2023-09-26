@@ -12,10 +12,10 @@ export default function CodeBlock({ code, handleEdit }) {
   }, []);
   return (
     <CodeMirror
+      className="m-4 w-full rounded-xl "
+      height="80vh"
       linewrapping={"true"}
-      className="max-w-[45vw] min-w-[35vw] text-2xl overflow-x-hidden break-words"
       value={code}
-      height="70vh"
       theme={vscodeDark}
       extensions={extensions}
       onChange={onChange}
