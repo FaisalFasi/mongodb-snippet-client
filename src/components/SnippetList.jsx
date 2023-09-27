@@ -11,7 +11,6 @@ const SnippetList = () => {
     fetch(import.meta.env.VITE_SNIPPET_API_KEY + "/snippets")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setSnippets(data);
       });
   }, []);

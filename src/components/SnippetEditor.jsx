@@ -24,7 +24,6 @@ const SnippetEditor = () => {
     fetch(import.meta.env.VITE_SNIPPET_API_KEY + "/snippets/" + snippet_id)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setSnippet(data);
       });
   }, []);
