@@ -51,7 +51,6 @@ const Navbar = () => {
         return httpResponse.json();
       })
       .then((data) => {
-        console.log(data);
         setSnippet(data);
       });
   };
