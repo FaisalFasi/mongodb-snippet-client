@@ -13,7 +13,7 @@ const Navbar = () => {
   const notify = (msg) => toast(msg);
 
   const sendDeleteSnippetRequest = () => {
-    fetch("http://localhost:9000/snippets/" + snippet.shortId, {
+    fetch(import.meta.env.VITE_SNIPPET_API_KEY + snippet.shortId, {
       method: "delete",
     }).then((httpResponse) => {
       if (httpResponse.ok) {
@@ -26,7 +26,7 @@ const Navbar = () => {
     });
   };
   const sendUpdateSnippetRequest = () => {
-    fetch("http://localhost:9000/snippets/" + snippet.shortId, {
+    fetch(import.meta.env.VITE_SNIPPET_API_KEY + snippet.shortId, {
       method: "put",
       headers: {
         "Content-type": "application/json",
@@ -53,7 +53,7 @@ const Navbar = () => {
   const sendCreateSnippetRequest = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:9000/snippets", {
+    fetch(import.meta.env.VITE_SNIPPET_API_KEY, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
