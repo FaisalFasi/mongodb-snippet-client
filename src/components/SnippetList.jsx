@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import SnippetListItem from "./SnippetListItem";
+import { SnippetContext } from "../Context/SnippetContext";
+
 const SnippetList = () => {
-  const [snippets, setSnippets] = useState([]);
+  const { snippetList } = useContext(SnippetContext);
+  const [snippets, setSnippets] = snippetList;
 
   useEffect(() => {
     fetch("http://localhost:9000/snippets")
