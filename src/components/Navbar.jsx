@@ -13,9 +13,12 @@ const Navbar = () => {
   const notify = (msg) => toast(msg);
 
   const sendDeleteSnippetRequest = () => {
-    fetch(import.meta.env.VITE_SNIPPET_API_KEY + snippet.shortId, {
-      method: "delete",
-    }).then((httpResponse) => {
+    fetch(
+      import.meta.env.VITE_SNIPPET_API_KEY + "/snippets/" + snippet.shortId,
+      {
+        method: "delete",
+      }
+    ).then((httpResponse) => {
       if (httpResponse.ok) {
         setSnippet({ title: "", content: "" });
         navigate("/");
@@ -26,16 +29,19 @@ const Navbar = () => {
     });
   };
   const sendUpdateSnippetRequest = () => {
-    fetch(import.meta.env.VITE_SNIPPET_API_KEY + snippet.shortId, {
-      method: "put",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        title: snippet.title,
-        content: snippet.content,
-      }),
-    })
+    fetch(
+      import.meta.env.VITE_SNIPPET_API_KEY + "/snippets/" + snippet.shortId,
+      {
+        method: "put",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          title: snippet.title,
+          content: snippet.content,
+        }),
+      }
+    )
       .then((httpResponse) => {
         if (httpResponse.ok) {
           notify("saved the changes successfully");
@@ -53,7 +59,7 @@ const Navbar = () => {
   const sendCreateSnippetRequest = (e) => {
     e.preventDefault();
 
-    fetch(import.meta.env.VITE_SNIPPET_API_KEY, {
+    fetch(import.meta.env.VITE_SNIPPET_API_KEY + "/snippets", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -68,7 +74,7 @@ const Navbar = () => {
         setSnippet(data);
 
         notify("snippet created successfully");
-        setSnippet({ title: "", content: "" });
+        // setSnippet({ title: "", content: "" });
         navigate("/" + data.shortId);
       });
   };

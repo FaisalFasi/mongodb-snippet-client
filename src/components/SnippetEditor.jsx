@@ -21,7 +21,7 @@ const SnippetEditor = () => {
     if (!snippet_id) {
       return;
     }
-    fetch(import.meta.env.VITE_SNIPPET_API_KEY + snippet_id)
+    fetch(import.meta.env.VITE_SNIPPET_API_KEY + "/snippets/" + snippet_id)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
