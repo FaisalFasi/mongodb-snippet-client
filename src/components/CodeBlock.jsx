@@ -1,22 +1,57 @@
+import { markdown } from "@codemirror/lang-markdown";
+import { javascript } from "@codemirror/lang-javascript";
+import { cpp } from "@codemirror/lang-cpp";
+import { html } from "@codemirror/lang-html";
+import { python } from "@codemirror/lang-python";
+import { json } from "@codemirror/lang-json";
+import { java } from "@codemirror/lang-java";
+
+const EXTENSIONS = {
+  markdown: markdown(),
+  python: python(),
+  javascript: javascript(),
+  typescript: javascript({ typescript: true }),
+  jsx: javascript({ jsx: true }),
+  tsx: javascript({ jsx: true, typescript: true }),
+  cpp: cpp(),
+  "c++": cpp(),
+  html: html(),
+  json: json(),
+  java: java(),
+};
+
 import React from "react";
 import CodeMirror from "@uiw/react-codemirror";
 // we use the @uiw/codemirror-theme-vscode  theme
-import { vscodeDark, vscodeDarkInit } from "@uiw/codemirror-theme-vscode";
-import { javascript } from "@codemirror/lang-javascript";
+import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import { basicLight, basicDark } from "@uiw/codemirror-theme-basic";
 
-const extensions = [javascript({ jsx: true })];
+import { useContext } from "react";
+import { SnippetContext } from "../Context/SnippetContext";
 
+import { ApplicationSettingsContext } from "../Context/ApplicationContext";
 export default function CodeBlock({ code, handleEdit }) {
+  const { editor } = useContext(SnippetContext);
+  const [snippet] = editor;
+  const { darkMode } = useContext(ApplicationSettingsContext);
+
+  const extensions = (() => {
+    if (snippet.language === "plaintext") {
+      return [];
+    } else {
+      return [EXTENSIONS[snippet.language]];
+    }
+  })();
+
   const onChange = (value) => {
     handleEdit(value);
   };
   return (
     <CodeMirror
-      className="m-4 w-full rounded-xl "
+      className="m-4 w-full md:w-[60%] rounded-xl "
       height="80vh"
-      linewrapping={"true"}
       value={code}
-      theme={vscodeDark}
+      theme={darkMode ? basicDark : basicLight}
       extensions={extensions}
       onChange={onChange}
     />

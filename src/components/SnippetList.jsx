@@ -16,10 +16,10 @@ const SnippetList = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-[90%] w-[300px] bg-blue-400 rounded-xl mt-4 overflow-scroll">
-      {snippets.map((snippet) => (
-        <SnippetListItem key={snippet.shortId} snippet={snippet} />
-      ))}
+    <div className="flex flex-col h-[80vh] w-[300px] bg-blue-400 rounded-xl mt-4 overflow-hidden overflow-y-scroll">
+      {snippets.map((snippet) => {
+        return <SnippetListItem key={snippet.shortId} snippet={snippet} />;
+      })}
     </div>
   );
 };
