@@ -1,3 +1,14 @@
+import React from "react";
+import CodeMirror from "@uiw/react-codemirror";
+// we use the @uiw/codemirror-theme-vscode  theme
+import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import { basicLight, basicDark } from "@uiw/codemirror-theme-basic";
+
+import { useContext } from "react";
+import { SnippetContext } from "../Context/SnippetContext";
+
+import { ApplicationSettingsContext } from "../Context/ApplicationContext";
+
 import { markdown } from "@codemirror/lang-markdown";
 import { javascript } from "@codemirror/lang-javascript";
 import { cpp } from "@codemirror/lang-cpp";
@@ -20,16 +31,6 @@ const EXTENSIONS = {
   java: java(),
 };
 
-import React from "react";
-import CodeMirror from "@uiw/react-codemirror";
-// we use the @uiw/codemirror-theme-vscode  theme
-import { vscodeDark } from "@uiw/codemirror-theme-vscode";
-import { basicLight, basicDark } from "@uiw/codemirror-theme-basic";
-
-import { useContext } from "react";
-import { SnippetContext } from "../Context/SnippetContext";
-
-import { ApplicationSettingsContext } from "../Context/ApplicationContext";
 export default function CodeBlock({ code, handleEdit }) {
   const { editor } = useContext(SnippetContext);
   const [snippet] = editor;

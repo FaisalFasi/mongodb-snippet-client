@@ -34,7 +34,7 @@ const SnippetEditor = () => {
         <div className="w-screen md:60">
           <CodeBlock code={snippet.content} handleEdit={handleEdit} />
         </div>
-        <div className="ml-4 md:ml-0">
+        <div className="ml-4 md:ml-0 flex justify-center">
           <SnippetList />
         </div>
       </div>
