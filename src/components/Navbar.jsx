@@ -3,94 +3,38 @@ import { useContext } from "react";
 import { SnippetContext } from "../Context/SnippetContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router";
 
 import { ApplicationSettingsContext } from "../Context/ApplicationContext";
 import { AVAILABLE_LANGUAGES } from "../enums/editor";
 
 const Navbar = () => {
-  const { editor } = useContext(SnippetContext);
+  const {
+    editor,
+    unsavedState,
+    sendCreateSnippetRequest,
+    sendUpdateSnippetRequest,
+    sendDeleteSnippetRequest,
+    resetFields,
+  } = useContext(SnippetContext);
   const [snippet, setSnippet] = editor;
 
   const { darkMode, setDarkMode, toggleDarkMode } = useContext(
     ApplicationSettingsContext
   );
-  const navigate = useNavigate();
 
   const notify = (msg) => toast(msg);
 
-  const sendDeleteSnippetRequest = () => {
-    fetch(
-      import.meta.env.VITE_SNIPPET_API_KEY + "/snippets/" + snippet.shortId,
-      {
-        method: "delete",
+  const handleSwitchToNewSnippet = () => {
+    if (unsavedState) {
+      const result = window.confirm(
+        "You have unsaved changes. Are you sure you want to create a new snippet?"
+      );
+      if (!result) {
+        return;
       }
-    ).then((httpResponse) => {
-      if (httpResponse.ok) {
-        setSnippet({
-          title: "",
-          content: "",
-          language: AVAILABLE_LANGUAGES.plaintext,
-        });
-        navigate("/");
-        notify("snippet deleted successfully");
-      } else {
-        notify("Something went wrong. please try again later");
-      }
-    });
+    }
+    resetFields();
   };
-  const sendUpdateSnippetRequest = () => {
-    fetch(
-      import.meta.env.VITE_SNIPPET_API_KEY + "/snippets/" + snippet.shortId,
-      {
-        method: "put",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          title: snippet.title,
-          content: snippet.content,
-          language: snippet.language,
-        }),
-      }
-    )
-      .then((httpResponse) => {
-        if (httpResponse.ok) {
-          notify("saved the changes successfully");
-        } else {
-          notify("Something went wrong. please try again later");
-        }
-        return httpResponse.json();
-      })
-      .then((data) => {
-        setSnippet(data);
-      });
-  };
-
-  const sendCreateSnippetRequest = (e) => {
-    e.preventDefault();
-
-    fetch(import.meta.env.VITE_SNIPPET_API_KEY + "/snippets", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        title: snippet.title,
-        content: snippet.content,
-        language: snippet.language,
-      }),
-    })
-      .then((httpResponse) => httpResponse.json())
-      .then((data) => {
-        setSnippet(data);
-
-        notify("snippet created successfully");
-        // setSnippet({ title: "", content: "" });
-        navigate("/" + data.shortId);
-      });
-  };
-
   const copyLink = () => {
     navigator.clipboard.writeText(window.location.href);
     notify("Link copied to clipboard");
@@ -147,9 +91,27 @@ const Navbar = () => {
             {snippet.shortId && (
               <button onClick={sendDeleteSnippetRequest}>Delete</button>
             )}
+            {snippet.shortId && (
+              <button onClick={handleSwitchToNewSnippet}>
+                Open Blank Snippent
+              </button>
+            )}
           </div>
         </div>
       </div>
+      <span className="pl-8 ">
+        {unsavedState && (
+          <span>
+            You have unsaved changes.
+            {snippet.updatedAt && (
+              <span>
+                (last saved at
+                {new Date(snippet.updatedAt).toLocaleDateString()})
+              </span>
+            )}{" "}
+          </span>
+        )}
+      </span>
     </div>
   );
 };
