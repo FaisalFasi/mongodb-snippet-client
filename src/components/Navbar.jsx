@@ -86,7 +86,7 @@ const Navbar = () => {
               onClick={toggleDarkMode}
             >
               {" "}
-              theme{" "}
+              Theme{" "}
             </button>
             {snippet.shortId ? (
               <button
@@ -125,7 +125,7 @@ const Navbar = () => {
                 className="px-1 border-2 border-solid border-black rounded-md"
                 onClick={handleSwitchToNewSnippet}
               >
-                new Snippent
+                New Snippent
               </button>
             )}
           </div>
