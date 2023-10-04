@@ -7,7 +7,7 @@ const SnippetList = () => {
   const [snippets] = snippetList;
 
   return (
-    <div className="flex flex-col h-[80vh] w-[300px] bg-blue-400 rounded-xl mt-4 overflow-hidden overflow-y-scroll">
+    <div className="flex flex-col w-full  rounded-xl p-2 gap-2 ">
       {snippets.map((snippet) => {
         return <SnippetListItem key={snippet.shortId} snippet={snippet} />;
       })}

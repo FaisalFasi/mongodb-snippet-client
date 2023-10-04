@@ -1,6 +1,5 @@
 import React from "react";
 import CodeMirror from "@uiw/react-codemirror";
-// we use the @uiw/codemirror-theme-vscode  theme
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { basicLight, basicDark } from "@uiw/codemirror-theme-basic";
 
@@ -47,14 +46,16 @@ export default function CodeBlock({ code, handleEdit }) {
   const onChange = (value) => {
     handleEdit(value);
   };
+
   return (
     <CodeMirror
-      className="m-4 w-full md:w-[60%] rounded-xl "
-      height="80vh"
+      className="m-2 rounded-xl "
+      height="60vh"
       value={code}
       theme={darkMode ? basicDark : basicLight}
       extensions={extensions}
       onChange={onChange}
+      style={{ wordWrap: "break-word" }}
     />
   );
 }

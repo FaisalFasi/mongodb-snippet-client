@@ -44,12 +44,12 @@ const Navbar = () => {
     <div>
       <div
         id="navbar"
-        className={`flex gap-4 p-2 rounded-xl justify-between items-center  m-4 bg-blue-400 ${
+        className={`flex  gap-2 md:gap-4 rounded-xl justify-between items-center  p-4 md:p-8 m-2  bg-gray-400 border-2 border-solid border-black ${
           darkMode ? "text-white" : "text-black"
         }}`}
       >
-        <h1 className="  text-2xl font-bold">FR-PasteBin</h1>
-        <div className="flex gap-8 justify-center items-center ">
+        <h1 className="sm:text-xl md:text-2xl font-bold">FR-PasteBin</h1>
+        <div className="flex flex-col md:flex-row gap-8 justify-center items-center ">
           <div className="flex flex-col gap-4">
             <input
               value={snippet.title}
@@ -81,19 +81,51 @@ const Navbar = () => {
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <button onClick={toggleDarkMode}> theme </button>
+            <button
+              className="px-1 border-2 border-solid border-black rounded-md"
+              onClick={toggleDarkMode}
+            >
+              {" "}
+              theme{" "}
+            </button>
             {snippet.shortId ? (
-              <button onClick={sendUpdateSnippetRequest}>Update</button>
+              <button
+                className="px-1 border-2 border-solid border-black rounded-md"
+                onClick={sendUpdateSnippetRequest}
+              >
+                Update
+              </button>
             ) : (
-              <button onClick={sendCreateSnippetRequest}>Save</button>
+              <button
+                className="px-1 border-2 border-solid border-black rounded-md"
+                onClick={sendCreateSnippetRequest}
+              >
+                Create
+              </button>
             )}
-            {snippet.shortId && <button onClick={copyLink}> Link</button>}
             {snippet.shortId && (
-              <button onClick={sendDeleteSnippetRequest}>Delete</button>
+              <button
+                className="px-1 border-2 border-solid border-black rounded-md"
+                onClick={copyLink}
+              >
+                {" "}
+                Link
+              </button>
             )}
             {snippet.shortId && (
-              <button onClick={handleSwitchToNewSnippet}>
-                Open Blank Snippent
+              <button
+                className="px-1 border-2 border-solid border-black rounded-md"
+                onClick={sendDeleteSnippetRequest}
+              >
+                Delete
+              </button>
+            )}
+            {snippet.shortId && (
+              <button
+                className="px-1 border-2 border-solid border-black rounded-md"
+                onClick={handleSwitchToNewSnippet}
+              >
+                new Snippent
               </button>
             )}
           </div>

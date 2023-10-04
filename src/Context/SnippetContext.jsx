@@ -35,7 +35,7 @@ export const SnippetProvider = ({ children }) => {
     } else {
       setUnsavedState(false);
     }
-  }, [snippet.title, snippet.content, snippet.language]);
+  }, [snippet, snippetsDIFF]);
 
   useEffect(() => {
     if (snippet_id) {
@@ -80,6 +80,7 @@ export const SnippetProvider = ({ children }) => {
         setSnippetDIFF(emptySnippetState);
 
         navigate("/");
+        setSnippets(snippets.filter((s) => s.shortId !== snippet.shortId));
 
         notify("snippet deleted successfully");
       } else {
@@ -112,8 +113,12 @@ export const SnippetProvider = ({ children }) => {
       })
       .then((data) => {
         setSnippet(data);
-        setUnsavedState(false);
         setSnippetDIFF(data);
+        setUnsavedState(false);
+        setSnippets([
+          updatedSnippet,
+          ...snippets.filter((s) => s.shortId !== updatedSnippet.shortId),
+        ]);
       });
   };
 
@@ -134,10 +139,9 @@ export const SnippetProvider = ({ children }) => {
       .then((httpResponse) => httpResponse.json())
       .then((newlyCreatedSnippet) => {
         setSnippet(newlyCreatedSnippet);
-
-        setUnsavedState(false);
         setSnippetDIFF(newlyCreatedSnippet);
 
+        setSnippets([newlyCreatedSnippet, ...snippets]);
         notify("snippet created successfully");
         navigate("/" + newlyCreatedSnippet.shortId);
       });

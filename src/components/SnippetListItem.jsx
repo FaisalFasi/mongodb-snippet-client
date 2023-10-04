@@ -2,7 +2,7 @@ import React from "react";
 import relativeDate from "../utils/relativeDate";
 const SnippetListItem = ({ snippet, handleDelete }) => {
   return (
-    <div className="text-center m-[10px] p-[10px] border-2 border-black rounded-xl ">
+    <div className="text-center m-[10px] p-[10px] border-2 border-black bg-gray-300 rounded-xl ">
       <div className="flex flex-col gap-4 overflow-hidden hover:overflow-visible">
         <a
           href={`/${snippet.shortId}`}
