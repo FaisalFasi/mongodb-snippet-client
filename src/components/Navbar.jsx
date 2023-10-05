@@ -82,22 +82,21 @@ const Navbar = () => {
           </div>
           <div className="flex flex-col gap-2">
             <button
-              className="px-1 border-2 border-solid border-black rounded-md"
+              className="px-1 border-2 border-solid border-black rounded-md hover:bg-gray-200"
               onClick={toggleDarkMode}
             >
-              {" "}
-              Theme{" "}
+              Theme
             </button>
             {snippet.shortId ? (
               <button
-                className="px-1 border-2 border-solid border-black rounded-md"
+                className="px-1 border-2 border-solid border-black rounded-md hover:bg-gray-200"
                 onClick={sendUpdateSnippetRequest}
               >
                 Update
               </button>
             ) : (
               <button
-                className="px-1 border-2 border-solid border-black rounded-md"
+                className="px-1 border-2 border-solid border-black rounded-md hover:bg-gray-200"
                 onClick={sendCreateSnippetRequest}
               >
                 Create
@@ -105,7 +104,7 @@ const Navbar = () => {
             )}
             {snippet.shortId && (
               <button
-                className="px-1 border-2 border-solid border-black rounded-md"
+                className="px-1 border-2 border-solid border-black rounded-md hover:bg-gray-200"
                 onClick={copyLink}
               >
                 {" "}
@@ -114,7 +113,7 @@ const Navbar = () => {
             )}
             {snippet.shortId && (
               <button
-                className="px-1 border-2 border-solid border-black rounded-md"
+                className="px-1 border-2 border-solid border-black rounded-md hover:bg-gray-200"
                 onClick={sendDeleteSnippetRequest}
               >
                 Delete
@@ -122,7 +121,7 @@ const Navbar = () => {
             )}
             {snippet.shortId && (
               <button
-                className="px-1 border-2 border-solid border-black rounded-md"
+                className="px-1 border-2 border-solid border-black rounded-md hover:bg-gray-200"
                 onClick={handleSwitchToNewSnippet}
               >
                 New Snippent

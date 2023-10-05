@@ -59,7 +59,7 @@ export const SnippetProvider = ({ children }) => {
         snippet,
         ...snippets
           .filter((s) => s.shortId !== snippet.shortId)
-          .sort((a, b) => b.updatedAt - a.updatedAt),
+          .sort((a, b) => a.updatedAt - b.updatedAt),
       ];
     } else {
       return [...snippets.sort((a, b) => b.updatedAt - a.updatedAt)];
@@ -116,8 +116,8 @@ export const SnippetProvider = ({ children }) => {
         setSnippetDIFF(data);
         setUnsavedState(false);
         setSnippets([
-          updatedSnippet,
-          ...snippets.filter((s) => s.shortId !== updatedSnippet.shortId),
+          data,
+          ...snippets.filter((s) => s.shortId !== data.shortId),
         ]);
       });
   };
