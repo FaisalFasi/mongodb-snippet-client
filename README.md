@@ -38,7 +38,7 @@ FR-PasteBin is a versatile web application that allows users to create, update, 
 - Frontend: React.js, Tailwind CSS
 - Backend: Node.js, Express.js
 - Database: MongoDB
-- Other Tools: Axios (HTTP client), Prism.js (syntax highlighting)
+- Other Tools: React Toastify (for notifications)
 
 ## Installation
 
