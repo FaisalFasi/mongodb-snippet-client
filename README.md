@@ -44,4 +44,4 @@ FR-PasteBin is a versatile web application that allows users to create, update, 
 
 1. Clone the repository:
    ```bash
-   git clone
+   git clone https://github.com/FaisalFasi/mongodb-snippet-client.git
